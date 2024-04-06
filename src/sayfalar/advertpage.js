@@ -16,9 +16,16 @@ const Advertpage = () => {
     const { id } = state;
 
     useEffect(() => {
-        getAdvertDetail(id)
+        await axios.get(
+            `${process.env.REACT_APP_API_URL}/advert/get-advert-detail?id=${id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
             .then((res) => {
-                setDetails(res.data);
+                setDetails(res.data[0]);
             })
             .catch((err) => {
                 Swal.fire({
@@ -115,33 +122,13 @@ const Advertpage = () => {
                                 alt={detail.title}
                                 style={{ width: "100%", height: "auto" }}
                             />
-                            {[...Array(3)].map((_, i) => (
-                                <Grid
-                                    key={i}
-                                    item
-                                    xs={2}
-                                    sx={{
-                                        width: "250px",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        marginLeft: "5px",
-                                    }}
-                                >
-                                    <img
-                                        style={{
-                                            height: "90%",
-                                            width: "90%",
-                                            objectFit: "cover",
-                                        }}
-                                        src={url}
-                                        alt={`Thumbnail ${i}`}
-                                    />
-                                </Grid>
-                            ))}
                         </Grid>
                     ))}
                     <Grid container item xs={3} sx={{ marginLeft: "30px" }}>
-                        <Advertpagedetails detail={detail.subDetails} />
+                        <Advertpagedetails
+                            detail={detail.subDetails}
+                            price={detail.price}
+                        />
                     </Grid>
                     <Grid container item xs={3} sx={{}}>
                         {/* <Advertpagedetails detail={detail.subDetails} /> */}
@@ -203,7 +190,7 @@ const Advertpage = () => {
                             cursor: "pointer",
                         }}
                     >
-                        Konumu
+                        Teknik Özellikler
                     </button>
                 </Grid>
                 <Divider
@@ -249,22 +236,67 @@ const Advertpage = () => {
             )}
             {Konumu && (
                 <Grid container sx={{ display: "flex", marginTop: "5px" }}>
-                    <Grid item xs={2.2} style={{}}></Grid>
                     <Grid
-                        xs={9}
-                        style={{
-                            backgroundColor: "white",
-                            border: "1px solid #ccc",
+                        xs={12}
+                        sx={{
+                            padding: "5%",
+                            paddingTop: "2%",
+                            display: "block",
                         }}
                     >
-                        <Grid
+                        <Typography
                             style={{
-                                height: "500px",
-                                margin: "30px 0px 0px 30px",
+                                textTransform: "uppercase",
+                                fontWeight: "bolder",
                             }}
                         >
-                            harita
-                        </Grid>
+                            {detail.title}{" "}
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            style={{
+                                color: "blue",
+                            }}
+                        >
+                            Genel Bakış
+                        </Typography>
+
+                        {detail.technicalProperties.map((det, index) => (
+                            <Grid
+                                container
+                                style={{
+                                    marginTop: "2%",
+                                    padding: "5px",
+                                    backgroundColor:
+                                        index % 2 === 0
+                                            ? "whitesmoke"
+                                            : "white",
+                                    height: "50px",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <Grid xs={6}>
+                                    <Typography
+                                        sx={{
+                                            fontWeight: "600",
+                                        }}
+                                    >
+                                        {det.title}{" "}
+                                    </Typography>
+                                </Grid>
+                                <Grid xs={6}>
+                                    <Typography
+                                        sx={{
+                                            color: det.title.includes("İlan No")
+                                                ? "red"
+                                                : "black",
+                                        }}
+                                    >
+                                        {det.value}{" "}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        ))}
                     </Grid>
                 </Grid>
             )}

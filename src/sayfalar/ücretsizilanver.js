@@ -85,6 +85,7 @@ const Ücretsizilanver = () => {
     };
 
     const handleSubmit = () => {
+        console.log(data);
         addAdvert(
             data.title,
             data.description,
@@ -104,7 +105,7 @@ const Ücretsizilanver = () => {
             .catch((err) => {
                 Swal.fire({
                     title: "Error",
-                    text: err.response.data.message,
+                    text: err.response,
                     icon: "error",
                     confirmButtonText: "Tamam",
                 });

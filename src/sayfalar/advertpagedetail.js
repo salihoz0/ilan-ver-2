@@ -1,13 +1,13 @@
-import { Grid,Tooltip,Typography,Divider } from "@mui/material"
+/** @format */
+
+import { Grid, Tooltip, Typography, Divider } from "@mui/material";
 import HistoryIcon from "@mui/icons-material/History";
 import React from "react";
 
-const Advertpagedetails=({detail})=>{
-
-
-    return(
+const Advertpagedetails = ({ detail, price }) => {
+    return (
         <Grid container xs={12}>
-            <Grid xs={12} sx={{ paddingLeft: "3%" ,marginTop:"10px"}}>
+            <Grid xs={12} sx={{ paddingLeft: "3%", marginTop: "10px" }}>
                 <Typography
                     sx={{
                         color: "blue",
@@ -18,12 +18,14 @@ const Advertpagedetails=({detail})=>{
                         fontSize: "20px",
                     }}
                 >
-                    170.000TL
+                    {price}
                     <Tooltip title="Fiyat Tarihçesi">
                         <HistoryIcon sx={{ fontSize: "20px" }} />
                     </Tooltip>
                 </Typography>
-                <Typography sx={{ marginTop:"20px",color: "blue", fontWeight: "600" }}>
+                <Typography
+                    sx={{ marginTop: "20px", color: "blue", fontWeight: "600" }}
+                >
                     İstanbul / Bahçelievler / Şirinevler Mah.
                 </Typography>
                 <Divider />
@@ -53,8 +55,7 @@ const Advertpagedetails=({detail})=>{
                     </Grid>
                 ))}
             </Grid>
-
         </Grid>
-    )
-} 
-export default Advertpagedetails
+    );
+};
+export default Advertpagedetails;

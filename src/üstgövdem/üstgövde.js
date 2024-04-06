@@ -184,8 +184,7 @@ let Üstgövde = ({ oniputchange, user, çikişyap }) => {
                             backgroundColor: "#3f475f",
                             color: "white",
                             textDecoration: underlinee1,
-                            display:
-                                kullanicigririş === "zehra" ? "none" : "flex",
+                            display: kullanicigririş ? "none" : "flex",
                         }}
                         onMouseOver={() => setUnderline1("underline")}
                         onMouseOut={() => setUnderline1("none")}
@@ -199,8 +198,7 @@ let Üstgövde = ({ oniputchange, user, çikişyap }) => {
                             backgroundColor: "#3f475f",
                             color: "violet",
                             textDecoration: underlinee1,
-                            display:
-                                kullanicigririş === "zehra" ? "flex" : "none",
+                            display: kullanicigririş ? "flex" : "none",
                         }}
                         onMouseOver={() => setUnderline1("underline")}
                         onMouseOut={() => setUnderline1("none")}
